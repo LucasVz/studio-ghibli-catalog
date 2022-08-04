@@ -32,8 +32,6 @@ const Description = styled.p`
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  transition-property: all;
-  transition-delay: 2s;
   &:hover {
     overflow: visible;
     display: block;

@@ -16,9 +16,9 @@ export default function HomePage() {
   const [att, setAtt] = useState(false);
   const [disabled, setDisabled] = useState(false);
 
-  async function getAllFilms(x) {
-    setPage(page + x);
-    const response = await api.getFilms(page + x);
+  async function getPageFilms(num) {
+    setPage(page + num);
+    const response = await api.getFilms(page + num);
     setFilms(response.data);
     setAtt(false);
   }
@@ -28,18 +28,18 @@ export default function HomePage() {
     await api.postFilms();
     setDisabled(false);
     setAtt(true);
-    alert("atualizado");
+    alert("updated");
   }
 
   useEffect(() => {
-    getAllFilms(0);
+    getPageFilms(0);
   }, [att]);
 
   return (
     <Container>
       <Title>STUDIO GHIBLI</Title>
       <Button disabled={disabled && "disabled"} onClick={postFilms}>
-        Atualizar filmes
+        Update Films
       </Button>
       <ContainerFilms>
         {films.map((film) => (
@@ -49,14 +49,14 @@ export default function HomePage() {
       <Pager>
         <PagerArrow
           disabled={page <= 0 && "disabled"}
-          onClick={(x) => getAllFilms(-1)}
+          onClick={(x) => getPageFilms(-1)}
         >
           &lt;
         </PagerArrow>
         <p>{page + 1}</p>
         <PagerArrow
           disabled={page >= films.length - 1 && "disabled"}
-          onClick={(x) => getAllFilms(1)}
+          onClick={(x) => getPageFilms(1)}
         >
           &gt;
         </PagerArrow>
